@@ -127,3 +127,6 @@ Some tests use fixed user IDs, expense IDs, email addresses, or other test data.
 - Search and date filtering
 - Export reports to CSV
 - Automated unit tests
+## Application Screenshot
+
+![Student Expense Tracker Dashboard](screenshots/dashboard.png)
