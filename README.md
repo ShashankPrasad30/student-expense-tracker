@@ -99,6 +99,23 @@ java -cp "src;lib\mysql-connector-j-26.7.0.jar" Main
 
 Use the console menu to register, log in, manage expenses, and track monthly budgets.
 
+### Run the application on Windows
+
+After completing the database setup and configuring `config.properties`, you can start the application in either of these ways.
+
+**Option 1: Use the launcher**
+
+Double-click `run.bat` in the project folder.
+
+**Option 2: Use the terminal**
+
+Open a terminal in the project folder and run:
+
+```bat
+java -cp "src;lib\mysql-connector-j-26.7.0.jar" Main
+```
+
+
 ## Testing
 
 The `tests/` directory contains manual Java test programs for individual features.
