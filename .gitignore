@@ -1,0 +1,8 @@
+# Local database credentials
+config.properties
+
+# Compiled Java files
+*.class
+
+# Local VS Code settings
+.vscode/

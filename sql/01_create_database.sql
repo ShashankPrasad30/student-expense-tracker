@@ -1,0 +1,3 @@
+CREATE DATABASE student_expense_tracker;
+
+USE student_expense_tracker;
