@@ -136,20 +136,70 @@ The following screenshot shows the Student Expense Tracker dashboard.
 
 ![Student Expense Tracker Dashboard](screenshots/dashboard.png)
 
+
 ## Testing
 
-The `tests/` directory contains manual Java test programs for individual features.
+The `tests/` directory contains manual Java tests and an expense CRUD integration test.
 
-For example, to compile and run the login test on Windows:
+### 1. Password Security Test
+
+This test checks password hashing, password verification, random salts, and invalid hashes. It does not require a database connection.
+
+Compile:
 
 ```bat
-javac -cp "lib\mysql-connector-j-26.7.0.jar;src" -d tests tests\LoginTest.java
-java -cp "src;tests;lib\mysql-connector-j-26.7.0.jar" LoginTest
+javac -cp "src;lib\mysql-connector-j-26.7.0.jar" -d tests tests\PasswordUtilTest.java
 ```
 
-Some test programs use fixed email addresses, user IDs, expense IDs, or other test data. Review a test before running it because it may register a user or insert, update, or delete database records.
+Run:
 
-Use a test database or disposable test records when testing operations that modify data.
+```bat
+java -cp "src;tests;lib\mysql-connector-j-26.7.0.jar" PasswordUtilTest
+```
+
+Expected final output:
+
+```text
+All password tests passed!
+```
+
+### 2. Expense CRUD Integration Test
+
+This test checks adding, updating, and deleting an expense. It also cleans up the temporary test user's data.
+
+**Important:** Run the test only against `student_expense_tracker_test`, never against your real application database.
+
+First, open MySQL Workbench and execute:
+
+`sql/03_create_test_database.sql`
+
+Then compile the integration test:
+
+```bat
+javac -cp "src;lib\mysql-connector-j-26.7.0.jar" -d tests tests\ExpenseCrudIntegrationTest.java
+```
+
+Run it against the test database:
+
+```bat
+java -Ddb.url=jdbc:mysql://localhost:3306/student_expense_tracker_test -cp "src;tests;lib\mysql-connector-j-26.7.0.jar" ExpenseCrudIntegrationTest
+```
+
+The database URL override selects the test database for this process. The MySQL username and password are still loaded from the local `config.properties` file.
+
+Expected final output:
+
+```text
+All expense CRUD integration tests passed!
+Temporary test data cleaned up.
+```
+
+### 3. Safety Notes
+
+- Configure your local MySQL credentials before running tests.
+- Do not commit `config.properties`.
+- Review manual tests before running them because they may modify database records.
+- Use the dedicated test database for integration tests.
 
 ## Security Notes
 
